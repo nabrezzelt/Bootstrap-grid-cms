@@ -1,0 +1,19 @@
+.login-frame {    
+    max-width: 400px; 
+    margin: 10% auto 0 auto;
+}
+
+body {
+    background-color: #212121; /* Width: 960px */    
+}
+
+.grid-stack > .grid-stack-item > .grid-stack-item-content {
+    background-color: #656565;
+    border-radius: 5px 5px 5px 5px;
+    padding: 10px;
+    color: white;
+}
+    
+.grid-stack {
+    margin: 15px;
+}

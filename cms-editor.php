@@ -1,4 +1,3 @@
-<!DOCTYPE html>
 <html lang="de">
   <head>
     <meta charset="utf-8">
@@ -13,7 +12,7 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.11.0/jquery-ui.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.js"></script>
-    <script src="https://raw.githubusercontent.com/lodash/lodash/4.17.4/dist/lodash.js"></script>
+    <script src="http://underscorejs.org/underscore.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/knockout/3.2.0/knockout-min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gridstack.js/0.2.6/gridstack.js"></script>
 
@@ -25,15 +24,37 @@
   </head>
   <body>
     <div class="grid-stack">
-        <div class="grid-stack-item" data-gs-x="0" data-gs-y="0" data-gs-width="1" data-gs-height="1" data-gs-max-height='1'>
-                <div class="grid-stack-item-content">Item 1</div>
+        <div class="grid-stack-item container-fluid-context show-modal" data-gs-x="0" data-gs-y="0" data-gs-width="12" data-gs-height="2" data-gs-max-height='2' data-gs-min-height='2' data-gs-min-width='12' data-gs-max-width='12'>
+            <div class="grid-stack-item-content">               
+                Container-Fluid (Full width)
+            </div>
         </div>
-        <div class="grid-stack-item" data-gs-x="4" data-gs-y="0" data-gs-width="1" data-gs-height="1" data-gs-max-height='1'> 
-            <div class="grid-stack-item-content">Item 2</div>
-        </div>
-        <div class="grid-stack-item" data-gs-x="8" data-gs-y="0" data-gs-width="1" data-gs-height="1" data-gs-max-height='1'>
-                <div class="grid-stack-item-content">Item 1</div>
-        </div>     
+        <div class="grid-stack-item container-context show-modal" data-gs-x="1" data-gs-y="2" data-gs-width="10" data-gs-height="2" data-gs-max-height='2' data-gs-min-height='2' data-gs-min-width='10' data-gs-max-width='10'>
+            <div class="grid-stack-item-content">               
+                Container (Space right/left)
+                <div class="grid-stack">
+                    <div class="grid-stack-item container-item show-modal" data-gs-x="0" data-gs-y="0" data-gs-width="1" data-gs-height="1" data-gs-max-height='1'><div class="grid-stack-item-content">Name<div class="html-content hidden">HTML-123-Tags</div></div></div>
+                </div>  
+            </div>
+        </div>  
+    </div>
+
+    <!-- Container-Context-Menu -->
+    <div id="container-contextmenu contextmenu" class="dropdown clearfix">
+        <ul class="dropdown-menu" role="menu" aria-labelledby="dropdownMenu" style="margin-bottom:5px;">            
+            <li><a href="#">Neues anlegen</a></li>
+            <li><a href="#">Löschen</a></li>
+        </ul>
+    </div>
+
+    <!-- Item-Context-Menu -->
+    <div id="item-contextmenu contextmenu" class="dropdown clearfix">
+        <ul class="dropdown-menu" role="menu" aria-labelledby="dropdownMenu" style="margin-bottom:5px;">
+            <li><a href="#">Ausschneiden</a></li>
+            <li><a href="#">Einfügen</a></li>            
+            <li class="divider"></li>
+            <li><a href="#">Löschen</a></li>
+        </ul>
     </div>
 
     <script type="text/javascript">        
@@ -45,7 +66,32 @@
               'float' : true
             });
         });
-    </script>
+
+        $(document).on("dblclick", ".show-modal", function() {                       
+            if($(this).hasClass("container-item"))
+            {
+                console.log("item");
+            }
+            else if($(this).hasClass("container-context")) 
+            {
+                console.log("normal");
+            }
+            else if($(this).hasClass("container-fluid-context")) 
+            {
+                console.log("fluid")
+            }
+            
+            $(".container-context .container-item").dblclick(function(e) {
+                e.stopPropagation();
+            });
+
+            $(".container-fluid-context .container-item").dblclick(function(e) {
+                e.stopPropagation();
+            });
+        });
+
+       
+    </script>    
   </body>
 </html>
 
